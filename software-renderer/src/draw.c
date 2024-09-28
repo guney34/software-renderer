@@ -18,7 +18,7 @@ void fill(struct TgaImage *image, uint32_t colour)
 }
 
 //Bresenham's line algorithm
-void line(struct TgaImage *image, size_t x0, int y0, int x1, int y1, uint32_t colour)
+void line(struct TgaImage *image, int x0, int y0, int x1, int y1, uint32_t colour)
 {
 	int dx = abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
 	int dy = abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
@@ -62,8 +62,9 @@ bool drawModel(struct TgaImage *image, struct ObjModel *model)
 			float y0 = ((*v0)[1] + 1.0f) * image->height / 2.0f;
 			float x1 = ((*v1)[0] + 1.0f) * image->width / 2.0f;
 			float y1 = ((*v1)[1] + 1.0f) * image->height / 2.0f;
-			line(image, (size_t)x0, (size_t)y0, (size_t)x1, (size_t)y1, WHITE);
+			line(image, x0, y0, x1, y1, WHITE);
 		}
 	}
+	return true;
 }
 

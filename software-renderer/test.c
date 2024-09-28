@@ -22,7 +22,7 @@ int main(void)
 	printf("num of verts: %zu\n", model->num_verts);
 	printf("num of faces: %zu\n", model->num_faces);
 	
-	size_t iterations = 10'000;
+	size_t iterations = 1;
 	uint64_t t = __rdtsc();
 	for (size_t i = 0; i < iterations; ++i) {
 		drawModel(image, model);
