@@ -10,15 +10,20 @@
 #include "obj.h"
 
 //sets the colour of a single pixel
-void setPixel(struct TgaImage *image, size_t x, size_t y, uint32_t colour);
+void setPixel(uint32_t *buffer, size_t width, size_t height, size_t x, size_t y, uint32_t colour);
 
 //fills entire pixel array
-void fill(struct TgaImage *image, uint32_t colour);
+void fill(uint32_t *buffer, size_t width, size_t height, uint32_t colour);
 
 //Bresenham's line algorithm
-void line(struct TgaImage *image, int x0, int y0, int x1, int y1, uint32_t colour);
+void line(uint32_t *buffer, size_t width, size_t height, int x0, int y0, int x1, int y1, uint32_t colour);
 
 //draw loaded obj file into pixel array (ignoring z values)
-bool drawModel(struct TgaImage *image, struct ObjModel *model);
+void drawModel(uint32_t *buffer, size_t width, size_t height, const struct ObjModel *model, float x, float y, float scale);
+
+//rotates model about an axis
+void rotateModelAboutX(struct ObjModel *model, float angle);
+void rotateModelAboutY(struct ObjModel *model, float angle);
+void rotateModelAboutZ(struct ObjModel *model, float angle);
 
 #endif

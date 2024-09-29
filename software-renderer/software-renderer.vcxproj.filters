@@ -15,31 +15,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\tga.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\obj.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\draw.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\obj.h">
+    <ClInclude Include="src\draw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\vec.h">
+    <ClInclude Include="src\obj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\tga.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\draw.h">
+    <ClInclude Include="src\vec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\draw.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\obj.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tga.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
