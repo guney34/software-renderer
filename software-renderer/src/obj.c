@@ -62,6 +62,10 @@ struct ObjModel *objRead(const char *filename)
 		}
 	}
 
+	model->rot[0] = 0;
+	model->rot[1] = 0;
+	model->rot[2] = 0;
+
 	fclose(file);
 	return model;
 }

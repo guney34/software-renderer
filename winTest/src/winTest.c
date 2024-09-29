@@ -31,9 +31,7 @@ static void displayBuffer(struct Buffer *buffer, HDC device_context, int window_
 
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prev_instance, LPWSTR cmd_line, int cmd_show)
 {
-	LARGE_INTEGER perf_counter_freq_result;
-	QueryPerformanceFrequency(&perf_counter_freq_result);
-	int64_t perf_counter_freq = perf_counter_freq_result.QuadPart;
+	
 
 	WNDCLASS window_class = {0};
 
@@ -57,10 +55,6 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prev_instance, LPWSTR cmd_line
 
 			struct ObjModel *model = objRead("head.obj");
 
-			LARGE_INTEGER last_counter;
-			QueryPerformanceCounter(&last_counter);
-			int64_t last_cycle_count = __rdtsc();
-
 			g_running = true;
 			while (g_running) {
 				MSG message;
@@ -74,29 +68,14 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prev_instance, LPWSTR cmd_line
 
 				
 				fill(g_buffer.memory, g_buffer.width, g_buffer.height, BLACK);
-				rotateModelAboutY(model, M_PI/180.0);
+				rotateModelAboutX(model, M_PI/360.0);
+				rotateModelAboutY(model, M_PI/360.0);
+				rotateModelAboutZ(model, M_PI/360.0);
 				drawModel(g_buffer.memory, g_buffer.width, g_buffer.height, model, 2.0f, 1.2f, 300);
 
 				struct WindowDim dimension = getWindowDimension(window);
 				displayBuffer(&g_buffer, device_context, dimension.width, dimension.height);
 
-				int64_t end_cycle_count = __rdtsc();
-
-				LARGE_INTEGER end_counter;
-				QueryPerformanceCounter(&end_counter);
-
-				int64_t cycles_elapsed = end_cycle_count - last_cycle_count;
-				int64_t counter_elapsed = end_counter.QuadPart - last_counter.QuadPart;
-				int32_t ms_per_frame = (int32_t)(((1000*counter_elapsed) / perf_counter_freq));
-				int32_t fps = (int32_t)(perf_counter_freq / counter_elapsed);
-				int32_t mcpf = cycles_elapsed/(1000*1000);
-
-				wchar_t char_buffer[256];
-				wsprintf(char_buffer, L"%dms/f, %df/s, %dmc/f\n", ms_per_frame, fps, mcpf);
-				OutputDebugString(char_buffer);
-
-				last_counter = end_counter;
-				last_cycle_count = end_cycle_count;
 			}
 		} else {
 			OutputDebugString(L"Failed to register window\n");

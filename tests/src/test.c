@@ -7,7 +7,7 @@
 
 #pragma intrinsic(__rdtsc)
 
-bool renderModel(char *obj_file, char *output_file, float x, float y, float scale);
+bool writeModel(char *obj_file, char *output_file, float x, float y, float scale);
 
 int main(void)
 {
@@ -18,7 +18,7 @@ int main(void)
 	renderModel("pumpkin_tall_10k.obj", "pumpkin_tall_10k.tga", 50, 50, 10);
 }
 
-bool renderModel(char *obj_file, char *output_file, float x, float y, float scale) {
+bool writeModel(char *obj_file, char *output_file, float x, float y, float scale) {
 	struct TgaImage *image = tgaAlloc(1920, 1080);
 	if (image == NULL)
 		return NULL;
