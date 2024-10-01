@@ -39,7 +39,7 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prev_instance, LPWSTR cmd_line
 	if (timeBeginPeriod(1) == TIMERR_NOERROR)
 		OutputDebugString(L"works\n");
 
-	target_microseconds_per_frame.QuadPart = 16666; // 16666 nanoseconds/f -> 60fps
+	target_microseconds_per_frame.QuadPart = 16666; // 16666 microseconds/f -> 60fps
 
 
 	WNDCLASS window_class = {0};
@@ -85,12 +85,12 @@ int WINAPI wWinMain(HINSTANCE instance, HINSTANCE prev_instance, LPWSTR cmd_line
 			DispatchMessage(&message);
 		}
 		
-		rotateModelAboutX(model, M_PI/360.0);
-		rotateModelAboutY(model, M_PI/360.0);
-		//rotateModelAboutZ(model, M_PI/360.0);
+		rotateModelAboutX(M_PI/360.0, model);
+		rotateModelAboutY(M_PI/360.0, model);
+		rotateModelAboutZ(M_PI/360.0, model);
 
-		fill(g_buffer.memory, g_buffer.width, g_buffer.height, BLACK);
-		drawModel(g_buffer.memory, g_buffer.width, g_buffer.height, model, 2.0f, 1.2f, 300);
+		fill(BLACK, g_buffer.memory, g_buffer.width, g_buffer.height);
+		drawModel(2.0f, 1.2f, 300, model, g_buffer.memory, g_buffer.width, g_buffer.height);
 
 		struct WindowDim dimension = getWindowDimension(window);
 		displayBuffer(&g_buffer, device_context, dimension.width, dimension.height);

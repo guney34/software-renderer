@@ -23,7 +23,7 @@ bool writeModel(char *obj_file, char *output_file, float x, float y, float scale
 	if (image == NULL)
 		return NULL;
 
-	fill(image->data, image->width, image->height, BLACK);
+	fill(BLACK, image->data, image->width, image->height);
 
 	struct ObjModel *model = objRead(obj_file);
 	if (model == NULL) {
@@ -31,7 +31,7 @@ bool writeModel(char *obj_file, char *output_file, float x, float y, float scale
 		return NULL;
 	}
 
-	drawModel(image->data, image->width, image->height, model, x, y, scale);
+	drawModel(x, y, scale, model, image->data, image->width, image->height);
 	objFree(model);
 	tgaWrite(output_file, image);
 	tgaFree(image);
